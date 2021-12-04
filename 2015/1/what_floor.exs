@@ -9,7 +9,6 @@ defmodule Floor do
   def process_2([_ | _], {total, count}) when total == -1, do: count
 
   def process_2([head | tail], {total, count}), do: process_2(tail, {score(head) + total, count + 1})
-
 end
 
 IO.puts(Floor.process(String.graphemes(File.read!("input.txt")), 0))
