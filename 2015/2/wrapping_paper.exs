@@ -21,11 +21,14 @@ defmodule Area do
     |> Enum.sum
   end
 
-  def wrapping(areas) do 
-    ribbon(areas)
-    +
-    areas |>
-    Enum.product
+  def ribbon_bow(areas) do 
+    r = ribbon(areas)
+    
+    a = areas 
+    |> Tuple.to_list
+    |> Enum.product
+    
+    r + a
   end
 
   def paper(l, w, h) do
@@ -42,15 +45,24 @@ defmodule Area do
   def total(l, w, h) do 
     {
       paper(l,w,h),
-      ribbon({l, w, h})
+      ribbon_bow({l, w, h})
     }
   end
 end
 
-File.stream!("input")
+totals = File.stream!("input")
 |> Stream.map( &String.replace(&1, "\n", "") )
 |> Stream.map( &String.split(&1, "x") )
 |> Stream.map( &Area.total(String.to_integer(Enum.at(&1,0)), String.to_integer(Enum.at(&1, 1)), String.to_integer(Enum.at(&1, 2)) ) )
 |> Enum.to_list()
+
+totals
+|> Enum.map(fn {paper, _} -> paper end)
+|> Enum.sum
+|> IO.puts
+
+
+totals
+|> Enum.map(fn {_, ribbon} -> ribbon end)
 |> Enum.sum
 |> IO.puts
