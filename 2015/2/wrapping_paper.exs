@@ -38,12 +38,19 @@ defmodule Area do
 
     total * 2 + min
   end
+
+  def total(l, w, h) do 
+    {
+      paper(l,w,h),
+      ribbon({l, w, h})
+    }
+  end
 end
 
 File.stream!("input")
 |> Stream.map( &String.replace(&1, "\n", "") )
 |> Stream.map( &String.split(&1, "x") )
-|> Stream.map( &Area.paper(String.to_integer(Enum.at(&1,0)), String.to_integer(Enum.at(&1, 1)), String.to_integer(Enum.at(&1, 2)) ) )
+|> Stream.map( &Area.total(String.to_integer(Enum.at(&1,0)), String.to_integer(Enum.at(&1, 1)), String.to_integer(Enum.at(&1, 2)) ) )
 |> Enum.to_list()
 |> Enum.sum
 |> IO.puts
