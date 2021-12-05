@@ -22,13 +22,9 @@ defmodule Area do
   end
 
   def ribbon_bow(areas) do 
-    r = ribbon(areas)
-    
-    a = areas 
-    |> Tuple.to_list
-    |> Enum.product
-    
-    r + a
+    ribbon(areas) + ( areas 
+      |> Tuple.to_list
+      |> Enum.product )
   end
 
   def paper(l, w, h) do
