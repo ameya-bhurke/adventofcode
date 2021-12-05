@@ -28,14 +28,12 @@ defmodule Area do
   end
 
   def paper(l, w, h) do
-    min = sides(l, w, h)
-    |> least
-    
-    total = sides(l, w, h)
-    |> Tuple.to_list
-    |> Enum.sum
-
-    total * 2 + min
+    ( sides(l, w, h)
+      |> least ) + 
+    ( 2 * ( sides(l, w, h)
+      |> Tuple.to_list
+      |> Enum.sum )
+    )
   end
 
   def total(l, w, h) do 
