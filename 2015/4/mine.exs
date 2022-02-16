@@ -6,8 +6,7 @@ defmodule Miner do
   def hash_key_and_salt(key, salt), do: Base.encode16(:crypto.hash(:md5, "#{key}#{salt}"))
 
   def min_salt(key, salt, n) do
-    min_salt = starts_with_n_zeroes(hash_key_and_salt(key, salt), n)
-    case min_salt do
+    case starts_with_n_zeroes(hash_key_and_salt(key, salt), n) do
       false -> min_salt(key, salt + 1, n)
       true -> IO.puts(salt)
     end
