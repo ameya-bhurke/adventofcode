@@ -11,10 +11,10 @@ defmodule NiceStr do
     end) > 2
   end
 
-  def same_consecutive(str) do
+  def same_consecutive(str, i) do
     String.graphemes(str)
-    |> Enum.chunk_every(2, 1, :discard)
-    |> Enum.reduce(false, fn x, acc -> acc || Enum.at(x, 0) == Enum.at(x, 1) end)
+    |> Enum.chunk_every(i+1, 1, :discard)
+    |> Enum.reduce(false, fn x, acc -> acc || Enum.at(x, 0) == Enum.at(x, i) end)
   end
 
   def does_not_contain(str) do
@@ -28,7 +28,7 @@ defmodule NiceStr do
 
   def check(str) do
     contains_3_vowels(str)
-    && same_consecutive(str)
+    && same_consecutive(str, 1)
     && does_not_contain(str)
   end
 
