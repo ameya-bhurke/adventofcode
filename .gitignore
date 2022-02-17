@@ -24,3 +24,6 @@ adventofcode-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# vim swp files
+*.swp
